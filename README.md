@@ -1,110 +1,103 @@
-# 🧬 Genetic Algorithm – Bit Pattern Optimisation
+Genetic Algorithm Web Application (Streamlit)
 
-**Artificial Intelligence | Lab Report 2 – Search Algorithms**
+A web-based interactive application built with Streamlit and Python to visualize and analyze the execution of Genetic Algorithms (GA) on binary bitstrings and continuous real-valued benchmark functions.
 
-## Project Overview
+Developed as part of the assessment for BSD3513: Introduction to Artificial Intelligence at Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA).
 
-This project demonstrates the implementation of a Genetic Algorithm (GA) to optimise binary bit patterns using evolutionary computation. Inspired by natural selection, the algorithm evolves a population of candidate solutions through selection, crossover, and mutation to search for an optimal chromosome.
+🔗 Project Links
 
-The main objective is to generate an 80-bit chromosome containing exactly 50 ones, which corresponds to the maximum fitness value of 80.
+Live Streamlit App: https://ga-lab2-hasnur.streamlit.app
 
-## Problem Definition
+GitHub Repository: https://github.com/hasnurhisham/Genetic-Algorithm
 
-The Genetic Algorithm is configured according to the following assignment requirements:
+📌 Problem Overview (Lab 2 Requirements)
 
-| Parameter | Value |
-|---|---|
-| Population size | 300 |
-| Chromosome length | 80 bits |
-| Target number of ones | 50 |
-| Maximum fitness value | 80 |
-| Number of generations | 50 |
-| Chromosome representation | Binary (0 and 1) |
+This project satisfies the custom optimization constraints of Lab Report 2 (Question 2):
 
-The optimisation aims to identify a chromosome that satisfies the target number of ones while maximising its fitness score.
+Population Size: $N = 300$ individuals.
 
-## Genetic Algorithm Methodology
+Chromosome Length: 80 bits.
 
-The Genetic Algorithm follows an evolutionary optimisation process:
+Generations: 50 generations.
 
-1. **Population Initialisation:** Generate an initial population of 300 binary chromosomes, each containing 80 bits.
-2. **Fitness Evaluation:** Calculate the fitness of each chromosome according to its number of ones. The highest possible fitness is 80 when exactly 50 ones are present.
-3. **Selection:** Select chromosomes for reproduction based on their fitness.
-4. **Crossover:** Combine genetic information from selected parent chromosomes to produce offspring.
-5. **Mutation:** Introduce random changes to selected bits to maintain genetic diversity.
-6. **Replacement:** Form the next generation using the offspring and the replacement strategy.
-7. **Termination:** Repeat the evolutionary process for up to 50 generations and report the best solution obtained.
+Target Objective: Custom fitness function reaching its global maximum score of 80.0 when the number of ones in the chromosome is equal to 50.
 
-## Technologies Used
+Mathematically, the custom OneMax fitness assignment is expressed as:
 
-| Technology | Purpose |
-|---|---|
-| Python | Genetic Algorithm implementation |
-| Streamlit | Interactive web application |
-| GitHub | Source code hosting and version control |
-| VS Code | Development environment |
+$$f(x) = 80 - \vert{}\text{count\_ones}(x) - 50\vert{}$$
 
-## Installation and Setup
+✨ Features
 
-### Clone the Repository
+Custom Fitness Function: Targets exact binary pattern constraints ($50 \text{ ones} \rightarrow \text{Fitness} = 80.0$).
 
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-cd YOUR-REPOSITORY
-```
+Real-Time Live Charting: Tracks Best, Average, and Worst population fitness across generations.
 
-### Install Dependencies
+Support for Multiple Benchmark Functions: Includes binary OneMax as well as real-valued continuous functions (Sphere and Rastrigin).
 
-```bash
-python3 -m pip install -r requirements.txt
-```
+Configurable GA Parameters: Easily tune population size, generations, crossover rate, mutation rate, tournament selection size, and elitism directly from the sidebar.
 
-### Run the Application
+Population Snapshot: Allows users to inspect the final population table and individual fitness scores.
 
-```bash
-python3 -m streamlit run app.py
-```
+🛠️ Project Structure
 
-The application will typically open at `http://localhost:8501`.
+├── GA_streamlit.py       # Main Streamlit application and GA logic
+├── requirements.txt      # Required dependencies for Streamlit Community Cloud
+└── README.md             # Project documentation
 
-## Results and Output
 
-The application is intended to demonstrate the evolutionary optimisation process by displaying the resulting bit pattern and its fitness value.
+🚀 Local Setup & Installation
 
-The main outputs to document are:
+Follow these steps to run the application locally on your machine:
 
-- Best chromosome obtained.
-- Number of ones in the best chromosome.
-- Best fitness value.
-- Generation at which the best solution was identified.
-- Fitness progression across generations, if implemented.
+1. Clone the Repository
 
-A successful optimal solution contains exactly 50 ones and achieves a fitness score of 80.
+git clone https://github.com/hasnurhisham/Genetic-Algorithm.git
+cd Genetic-Algorithm
 
-## Application Screenshots
 
-Include screenshots demonstrating the actual application and results.
+2. Set Up Virtual Environment (Optional but Recommended)
 
-Suggested screenshots:
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
 
-- Genetic Algorithm configuration.
-- Best chromosome and fitness score.
-- Fitness progression graph, if available.
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-## Deployment
 
-**Live Application:** [Insert your deployed Streamlit URL]
+3. Install Dependencies
 
-**GitHub Repository:** [Insert your repository URL]
+pip install -r requirements.txt
 
-## Limitations
 
-Genetic Algorithms are stochastic optimisation methods, meaning their results may vary between runs. Their performance depends on the fitness function, selection mechanism, crossover and mutation settings, and number of generations. Therefore, the algorithm is not guaranteed to identify the optimal solution in every run.
+4. Run the Streamlit App
 
-## Project Information
+streamlit run GA_streamlit.py
 
-**Course:** BSD3513 Artificial Intelligence  
-**Assessment:** Lab Report 2 – Search Algorithms  
-**Topic:** Genetic Algorithm  
-**Developer:** [Your name]  
-**Institution:** Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA)
+
+📦 Dependencies (requirements.txt)
+
+Ensure your repository contains a requirements.txt file with the following packages:
+
+streamlit>=1.30.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+
+📊 Experimental Results
+
+When executed with the lab parameter configuration (80 bits, 300 population, 50 generations):
+
+Target Fitness Achieved: 80.000000
+
+Optimal Chromosome: Contains exactly 50 ones and 30 zeros ($\sum_{i=1}^{80} x_i = 50$).
+
+Convergence Behavior:
+
+Best Fitness maintains the optimal solution via elitism.
+
+Average Fitness rapidly converges from ~70.0 to ~78.5 due to tournament selection and crossover.
+
+Worst Fitness demonstrates continuous variance due to bit mutation, preventing premature stagnation.
+
